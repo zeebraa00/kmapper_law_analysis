@@ -12,8 +12,7 @@ law_dict = {}
 i=0
 for row in load_ws.rows:
     i +=1
-    # if i == 17143 :
-    if i == 500 :
+    if i == 17143 :
         break
 
     row_value = []
@@ -78,8 +77,6 @@ for i in range(law_num) :
 
 distance_matrix = np.array(distance_matrix)
 
-print(distance_matrix)
-
 # update distance matrix
 for i in range(len(output)) :
     t_len = int(len(output[i])/2)
@@ -101,14 +98,12 @@ for i in range(len(output)) :
         idx_list = []
         for k in range(n) :
             idx_list.append(law_list.index(case_law[k]))
-        print(idx_list)
+        # print(idx_list)
         for n1 in idx_list :
             for n2 in idx_list :
                 if n1 == n2 :
                     continue
                 distance_matrix[n1][n2] = distance_matrix[n1][n2]/2
 
-for i in range(len(distance_matrix)) :
-    print(distance_matrix[i])
-
-print(distance_matrix)
+# save as binary file
+np.save('law_data/custom_metric',distance_matrix)
