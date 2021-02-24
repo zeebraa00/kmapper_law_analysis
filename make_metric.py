@@ -2,7 +2,7 @@ import operator
 import numpy as np
 from openpyxl import load_workbook
 
-load_wb = load_workbook("law_data.xlsx")
+load_wb = load_workbook("./law_data/law_data.xlsx")
 load_ws = load_wb['sheet1']
 
 values = []
