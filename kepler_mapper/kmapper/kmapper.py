@@ -78,7 +78,6 @@ class KeplerMapper(object):
 
     def project(
         self,
-        X,
         projection="sum",
         scaler="default:MinMaxScaler",
         distance_matrix=None,
@@ -161,14 +160,14 @@ class KeplerMapper(object):
         """
 
         # Sae original values off so they can be referenced by later functions in the pipeline
-        self.inverse = X
+        # self.inverse = X
         scaler = preprocessing.MinMaxScaler() if scaler == "default:MinMaxScaler" else scaler
         self.scaler = scaler
         self.projection = str(projection)
         self.distance_matrix = distance_matrix
 
-        if self.verbose > 0:
-            print("..Projecting on data shaped %s" % (str(X.shape)))
+        # if self.verbose > 0:
+        #     print("..Projecting on data shaped %s" % (str(X.shape)))
 
         # If distance_matrix is a scipy.spatial.pdist string, we create a square distance matrix
         # from the vectors, before applying a projection.
@@ -195,12 +194,16 @@ class KeplerMapper(object):
             "sqeuclidean",
             "yule",
         ]:
-            X = distance.squareform(distance.pdist(X, metric=distance_matrix))
-            if self.verbose > 0:
-                print(
-                    "Created distance matrix, shape: %s, with distance metric `%s`"
-                    % (X.shape, distance_matrix)
-                )
+            # X = distance.squareform(distance.pdist(X, metric=distance_matrix))
+            
+            ## use custom metric
+            X = np.load("law_data/custom_metric.npy")
+
+            # if self.verbose > 0:
+                # print(
+                #     "Created distance matrix, shape: %s, with distance metric `%s`"
+                #     % (X.shape, distance_matrix)
+                # )
 
         # Detect if projection is a class (for scikit-learn)
         try:
