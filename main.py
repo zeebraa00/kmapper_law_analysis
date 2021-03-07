@@ -21,8 +21,8 @@ cubes=30
 overlap=0.2
 
 # Create dictionary called 'graph' with nodes, edges and meta-information
-graph = mapper.map(projected_data, cover=km.Cover(n_cubes=cubes, perc_overlap=overlap))
+graph = mapper.map(projected_data,cover=km.Cover(n_cubes=cubes, perc_overlap=overlap), clusterer=sklearn.cluster.DBSCAN(metric="precomputed"))
 
 # Visualize it
 mapper.visualize(graph, path_html="keplermapper_output_"+str(cubes)+"_"+str(overlap)+".html",
-                 title="law analysis using tda ("+str(cubes)+"/"+str(overlap)")")
+                 title="law analysis using tda ("+str(cubes)+"/"+str(overlap)+")")
