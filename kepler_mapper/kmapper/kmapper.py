@@ -193,6 +193,7 @@ class KeplerMapper(object):
             "sokalsneath",
             "sqeuclidean",
             "yule",
+            "precomputed"
         ]:
             # X = distance.squareform(distance.pdist(X, metric=distance_matrix))
             
@@ -375,6 +376,7 @@ class KeplerMapper(object):
         clusterer=None,
         cover=None,
         nerve=None,
+        ## 수정
         precomputed=False,
         remove_duplicate_nodes=False,
     ):
@@ -532,9 +534,16 @@ class KeplerMapper(object):
                 X_cube = X[ids]
 
                 fit_data = X_cube[:, 1:]
+
+                print("#"*20)
+                print(fit_data)
+                print("#"*20)
+                print(ids)
+                print("#"*20)
+
                 if precomputed:
                     fit_data = fit_data[:, ids]
-
+                         
                 cluster_predictions = clusterer.fit_predict(fit_data)
 
                 if self.verbose > 1:
