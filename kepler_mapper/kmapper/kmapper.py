@@ -376,7 +376,6 @@ class KeplerMapper(object):
         clusterer=None,
         cover=None,
         nerve=None,
-        ## 수정
         precomputed=False,
         remove_duplicate_nodes=False,
     ):
@@ -541,8 +540,8 @@ class KeplerMapper(object):
                 print(ids)
                 print("#"*20)
 
-                if precomputed:
-                    fit_data = fit_data[:, ids]
+                # if precomputed:
+                    # fit_data = fit_data[:, ids]
                          
                 cluster_predictions = clusterer.fit_predict(fit_data)
 
@@ -633,7 +632,7 @@ class KeplerMapper(object):
         title="Kepler Mapper",
         save_file=True,
         X=None,
-        X_names=None,
+        X_names=np.load("law_data/law_list.npy").tolist(),
         lens=None,
         lens_names=None,
         show_tooltips=True,
@@ -762,7 +761,7 @@ class KeplerMapper(object):
         color_values = init_color_values(graph, color_values)
 
         if X_names is None:
-            X_names = []
+            X_names = np.load("law_data/law_list.npy").tolist()
 
         if lens_names is None:
             lens_names = []

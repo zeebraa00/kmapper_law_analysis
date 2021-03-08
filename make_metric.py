@@ -63,6 +63,12 @@ law_num = len(law_list) ## 판례에서 사용된 법 갯수
 # for i in law_dict.items() :
 #     print(i)
 
+for i in range(len(law_list)) :
+    print(law_list[i])
+
+np_law_list = np.array(law_list)
+np.save('law_list',np_law_list)
+
 distance_matrix = []
 
 ## initiate distance matrix
