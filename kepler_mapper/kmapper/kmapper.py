@@ -632,7 +632,7 @@ class KeplerMapper(object):
         title="Kepler Mapper",
         save_file=True,
         X=None,
-        X_names=np.load("law_data/law_list.npy").tolist(),
+        X_names=None,
         lens=None,
         lens_names=None,
         show_tooltips=True,
@@ -761,7 +761,7 @@ class KeplerMapper(object):
         color_values = init_color_values(graph, color_values)
 
         if X_names is None:
-            X_names = np.load("law_data/law_list.npy").tolist()
+            X_names = []
 
         if lens_names is None:
             lens_names = []

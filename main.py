@@ -9,8 +9,7 @@ from sklearn import datasets
 # data, labels = datasets.make_circles(n_samples=7543, noise=0.03, factor=0.3)
 # print(data)
 
-names=np.load("law_list.npy").tolist()
-print(names)
+names=np.load("law_data/law_list.npy").tolist()
 
 # Initialize
 mapper = km.KeplerMapper(verbose=1)
@@ -27,7 +26,9 @@ overlap=0.2
 graph = mapper.map(projected_data,
                 cover=km.Cover(n_cubes=cubes, perc_overlap=overlap),
                 precomputed=True,
-                clusterer=sklearn.cluster.DBSCAN(metric="precomputed"))
+                # clusterer=sklearn.cluster.DBSCAN(metric="precomputed"),
+                clusterer = sklearn.cluster.KMeans()
+                )
 
 # Visualize it
 mapper.visualize(graph, path_html="keplermapper_output_"+str(cubes)+"_"+str(overlap)+".html",
