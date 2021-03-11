@@ -289,6 +289,7 @@ class KeplerMapper(object):
 
         return X
 
+    
     def fit_transform(
         self,
         X,
@@ -533,16 +534,17 @@ class KeplerMapper(object):
                 X_cube = X[ids]
 
                 fit_data = X_cube[:, 1:]
+                # print("\n\n")
+                # print(fit_data)
+                # print("\n\n")
+                # print(ids)
+                # print("\n\n")
 
-                print("#"*20)
-                print(fit_data)
-                print("#"*20)
-                print(ids)
-                print("#"*20)
-
-                # if precomputed:
-                    # fit_data = fit_data[:, ids]
-                         
+                if precomputed:
+                    fit_data = fit_data[:, ids]
+                    # fit_data = np.load("law_data/custom_metric.npy")
+                # print(fit_data)
+                # print("\n\n")
                 cluster_predictions = clusterer.fit_predict(fit_data)
 
                 if self.verbose > 1:

@@ -10,6 +10,7 @@ from sklearn import datasets
 # print(data)
 
 names=np.load("law_data/law_list.npy").tolist()
+custom_metric = np.load("law_data/custom_metric.npy")
 
 # Initialize
 mapper = km.KeplerMapper(verbose=1)
@@ -20,17 +21,19 @@ projected_data = mapper.project(
 )
 
 cubes=30
-overlap=0.2
+overlap=0.3
+epsilon=5
 
 # Create dictionary called 'graph' with nodes, edges and meta-information
-graph = mapper.map(projected_data,
+graph = mapper.map(
+                projected_data,
+                X=custom_metric,
                 cover=km.Cover(n_cubes=cubes, perc_overlap=overlap),
                 precomputed=True,
-                # clusterer=sklearn.cluster.DBSCAN(metric="precomputed"),
-                clusterer = sklearn.cluster.AgglomerativeClustering(affinity='precomputed',linkage='average')
+                clusterer=sklearn.cluster.DBSCAN(eps=epsilon, metric='precomputed')
                 )
 
 # Visualize it
-mapper.visualize(graph, path_html="keplermapper_output_"+str(cubes)+"_"+str(overlap)+".html",
+mapper.visualize(graph, path_html="keplermapper_output_"+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+".html",
                  X_names=names,
-                 title="law analysis using tda ("+str(cubes)+"/"+str(overlap)+")")
+                 title="law analysis using tda ("+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+")")

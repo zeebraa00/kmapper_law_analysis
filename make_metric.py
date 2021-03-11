@@ -66,11 +66,11 @@ law_num = len(law_list) ## 판례에서 사용된 법 갯수
 for i in range(len(law_list)) :
     print(law_list[i])
 
-# f1=open('./law_index.txt','w')
-# for i in range(len(law_list)) :
-#     line = str(i+1)+"."+law_list[i]+"\n"
-#     f1.write(line)
-# f1.close()
+f1=open('./law_index.txt','w')
+for i in range(len(law_list)) :
+    line = str(i)+"."+law_list[i]+"\n"
+    f1.write(line)
+f1.close()
 
 np_law_list = np.array(law_list)
 np.save('law_list',np_law_list)
@@ -95,13 +95,22 @@ for i in range(len(output)) :
 
     for j in range(t_len) :
         case_law = []
+        chk = False
         pre = str(output[i][2*j])
+        
         post = str(output[i][2*j+1]).split(', ')
         for k in range(len(post)) :
             if post[k][-2] == "의" :
                 post[k] = post[k][0:-2]
-            final = pre+' '+post[k]            
+            final = pre+' '+post[k]
+            # if final == "문화재보호법 제2조" :
+            #     chk = True
             case_law.append(final)
+
+        if chk :
+            print("="*30)
+            print(case_law)
+            print("="*30)
 
         n = len(case_law)
         if n==1 :
