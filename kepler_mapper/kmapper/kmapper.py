@@ -195,16 +195,16 @@ class KeplerMapper(object):
             "yule",
             "precomputed"
         ]:
-            # X = distance.squareform(distance.pdist(X, metric=distance_matrix))
-            
+            """
+            X = distance.squareform(distance.pdist(X, metric=distance_matrix))
+            if self.verbose > 0:
+                print(
+                    "Created distance matrix, shape: %s, with distance metric `%s`"
+                    % (X.shape, distance_matrix)
+                )
+            """
             ## use custom metric
             X = np.load("law_data/custom_metric.npy")
-
-            # if self.verbose > 0:
-                # print(
-                #     "Created distance matrix, shape: %s, with distance metric `%s`"
-                #     % (X.shape, distance_matrix)
-                # )
 
         # Detect if projection is a class (for scikit-learn)
         try:
@@ -534,17 +534,9 @@ class KeplerMapper(object):
                 X_cube = X[ids]
 
                 fit_data = X_cube[:, 1:]
-                # print("\n\n")
-                # print(fit_data)
-                # print("\n\n")
-                # print(ids)
-                # print("\n\n")
 
                 if precomputed:
                     fit_data = fit_data[:, ids]
-                    # fit_data = np.load("law_data/custom_metric.npy")
-                # print(fit_data)
-                # print("\n\n")
                 cluster_predictions = clusterer.fit_predict(fit_data)
 
                 if self.verbose > 1:
