@@ -73,7 +73,7 @@ np.save('law_list',np_law_list)
 
 distance_matrix = []
 
-# initiate distance matrix uniformly (The distance between all laws is 1.)
+# initiate distance matrix uniformly (Set the distance between all laws to 1.)
 for i in range(law_num) :
     tmp = []
     for j in range(law_num) :
