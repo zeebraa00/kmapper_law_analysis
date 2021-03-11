@@ -19,6 +19,7 @@ projected_data = mapper.project(
     distance_matrix="precomputed"
 )
 
+# Set hyperparameters for clustering
 cubes=30
 overlap=0.3
 epsilon=5
