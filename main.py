@@ -4,12 +4,6 @@ from kepler_mapper import kmapper as km
 import sklearn
 from sklearn import datasets
 
-####
-
-# data, labels = datasets.make_circles(n_samples=7543, noise=0.03, factor=0.3)
-# print(data)
-
-names=np.load("law_data/law_list.npy").tolist()
 custom_metric = np.load("law_data/custom_metric.npy")
 
 # Initialize
@@ -30,10 +24,9 @@ graph = mapper.map(
                 X=custom_metric,
                 cover=km.Cover(n_cubes=cubes, perc_overlap=overlap),
                 precomputed=True,
-                clusterer=sklearn.cluster.DBSCAN(eps=epsilon, metric='precomputed')
+                clusterer=sklearn.cluster.DBSCAN(eps=epsilon, metric='precomputed').fit(custom_metric)
                 )
 
 # Visualize it
 mapper.visualize(graph, path_html="keplermapper_output_"+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+".html",
-                 X_names=names,
                  title="law analysis using tda ("+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+")")
