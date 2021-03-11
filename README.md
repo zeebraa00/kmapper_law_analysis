@@ -31,9 +31,9 @@ $ pip install openpyxl
 $ python make_metric.py
 ```
 We have focused on the reference relation of law.
-First, initiate the distance matrix. (The distance between all laws is 1.)
-Then, shorten distance between laws used in same precedent while scanning Korean precedents.
-Finally, the completed distance matrix is saved as a binary file. (law_data/custom_metric.npy)
+1. Initiate the distance matrix. (The distance between all laws is 1.)
+2. Shorten distance between laws used in same precedent while scanning Korean precedents.
+3. The completed distance matrix is saved as a binary file. (law_data/custom_metric.npy)
 
 ### 4. Cluster Korean-law-data using kepler-mapper
 ```shell
