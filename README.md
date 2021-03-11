@@ -1,2 +1,2 @@
-# topological_law_data_analysis
+# kmapper_law_analysis
 Korean law data analysis using TDA &amp; mapper algorithm
