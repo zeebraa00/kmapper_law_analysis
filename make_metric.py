@@ -66,6 +66,12 @@ law_num = len(law_list) ## 판례에서 사용된 법 갯수
 for i in range(len(law_list)) :
     print(law_list[i])
 
+# f1=open('./law_index.txt','w')
+# for i in range(len(law_list)) :
+#     line = str(i+1)+"."+law_list[i]+"\n"
+#     f1.write(line)
+# f1.close()
+
 np_law_list = np.array(law_list)
 np.save('law_list',np_law_list)
 

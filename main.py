@@ -27,7 +27,7 @@ graph = mapper.map(projected_data,
                 cover=km.Cover(n_cubes=cubes, perc_overlap=overlap),
                 precomputed=True,
                 # clusterer=sklearn.cluster.DBSCAN(metric="precomputed"),
-                clusterer = sklearn.cluster.KMeans()
+                clusterer = sklearn.cluster.AgglomerativeClustering(affinity='precomputed',linkage='average')
                 )
 
 # Visualize it
