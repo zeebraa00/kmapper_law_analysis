@@ -31,7 +31,7 @@ $ pip install openpyxl
 $ python make_metric.py
 ```
 We have focused on the reference relation of law.
-1. Initiate the distance matrix. (The distance between all laws is 1.)
+1. Initiate the distance matrix. (Set distances between all laws to 1.)
 2. Shorten distance between laws used in same precedent while scanning Korean precedents.
 3. The completed distance matrix is saved as a binary file. (law_data/custom_metric.npy)
 
