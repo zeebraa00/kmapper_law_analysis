@@ -3,7 +3,7 @@
 
 ---
 
-## Installation
+## Installation & Execution
 
 ### Prerequistes
 - Python (>= 3.6)
