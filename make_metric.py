@@ -8,11 +8,12 @@ load_ws = load_wb['sheet1']
 values = []
 output = []
 law_dict = {}
+num_row = 17143 # number of rows of excel file
 
 i=0
 for row in load_ws.rows:
     i +=1
-    if i == 17143 :
+    if i == num_row :
         break
 
     row_value = []
@@ -28,7 +29,7 @@ for j in range(len(values)) :
     else :
         output[-1].extend(values[j])
 
-## 오류 데이터 필터링
+# filtering error data (blank etc..)
 idx = 0
 while True :
     if idx == len(output) :
@@ -38,7 +39,7 @@ while True :
         idx-=1
     idx+=1
 
-## 법 데이터 전처리 및 카운트
+# preprocessing data
 for i in range(len(output)) :
     t_len = int(len(output[i])/2)
 
@@ -55,29 +56,24 @@ for i in range(len(output)) :
             else :
                 law_dict[final] = 1 # new
 
-# print(law_dict)
+law_list = list(law_dict.keys()) # list of whole laws used in all cases
+law_num = len(law_list) # number of whole laws used in all cases
 
-law_list = list(law_dict.keys()) ## 판례에서 사용된 법 리스트 -> 인덱스 유지해야함
-law_num = len(law_list) ## 판례에서 사용된 법 갯수
-
-# for i in law_dict.items() :
-#     print(i)
-
-for i in range(len(law_list)) :
-    print(law_list[i])
-
+# code for checking whether our clustering is done in right way
+"""
 f1=open('./law_index.txt','w')
 for i in range(len(law_list)) :
     line = str(i)+"."+law_list[i]+"\n"
     f1.write(line)
 f1.close()
+"""
 
 np_law_list = np.array(law_list)
 np.save('law_list',np_law_list)
 
 distance_matrix = []
 
-## initiate distance matrix
+# initiate distance matrix uniformly (The distance between all laws is 1.)
 for i in range(law_num) :
     tmp = []
     for j in range(law_num) :
@@ -87,44 +83,45 @@ for i in range(law_num) :
             tmp.append(1.0)
     distance_matrix.append(tmp)
 
-distance_matrix = np.array(distance_matrix)
+distance_matrix = np.array(distance_matrix) # initiated distance matrix
 
 # update distance matrix
 for i in range(len(output)) :
     t_len = int(len(output[i])/2)
 
     for j in range(t_len) :
-        case_law = []
-        chk = False
+        case_law = [] # list for saving laws used in same case
+        do_monitor = False
+
         pre = str(output[i][2*j])
-        
         post = str(output[i][2*j+1]).split(', ')
         for k in range(len(post)) :
             if post[k][-2] == "의" :
                 post[k] = post[k][0:-2]
             final = pre+' '+post[k]
-            # if final == "문화재보호법 제2조" :
-            #     chk = True
             case_law.append(final)
 
-        if chk :
-            print("="*30)
-            print(case_law)
-            print("="*30)
+            # code for checking whether our clustering is done in right way    
+            if final == "문화재보호법 제2조" :
+                do_monitor = True
 
-        n = len(case_law)
-        if n==1 :
+        # code for checking whether our clustering is done in right way
+        if do_monitor :
+            print("="*30);print(case_law);print("="*30)
+
+        if len(case_law)==1 :
             continue
-        ## shorten distance between laws
+
+        ## shorten distance between laws used in same case (multiply 0.5)
         idx_list = []
-        for k in range(n) :
+        for k in range(len(case_law)) :
             idx_list.append(law_list.index(case_law[k]))
-        # print(idx_list)
+
         for n1 in idx_list :
             for n2 in idx_list :
                 if n1 == n2 :
                     continue
                 distance_matrix[n1][n2] = distance_matrix[n1][n2]/2
 
-# save as binary file
+# save custom metric as binary file
 np.save('law_data/custom_metric',distance_matrix)
