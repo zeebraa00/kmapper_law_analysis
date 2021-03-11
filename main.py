@@ -1,3 +1,8 @@
+"""
+Copyright ⓒ 2021 성균관대학교 수학과 정재헌(JaeHeon Jeong) All Rights Reserved
+email : zeebraa00@gmail.com
+"""
+
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 from kepler_mapper import kmapper as km
