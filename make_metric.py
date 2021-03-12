@@ -34,7 +34,7 @@ for j in range(len(values)) :
     else :
         output[-1].extend(values[j])
 
-# filtering error data (blank etc..)
+# removing error data (blank etc..)
 idx = 0
 while True :
     if idx == len(output) :
