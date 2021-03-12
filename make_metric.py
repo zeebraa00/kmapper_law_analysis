@@ -64,17 +64,13 @@ for i in range(len(output)) :
 law_list = list(law_dict.keys()) # list of whole laws used in all cases
 law_num = len(law_list) # number of whole laws used in all cases
 
-# code for checking whether our clustering is done in right way
-"""
-f1=open('./law_index.txt','w')
-for i in range(len(law_list)) :
-    line = str(i)+"."+law_list[i]+"\n"
-    f1.write(line)
-f1.close()
-"""
 
-np_law_list = np.array(law_list)
-np.save('law_list',np_law_list)
+# make a numpy array for matching law and index
+np_law_list=[]
+for i in range(len(law_list)) :
+    np_law_list.append(law_list[i] + "/")
+np_law_list = np.array(np_law_list)
+np.save('law_data/law_list',np_law_list)
 
 distance_matrix = []
 
@@ -106,8 +102,10 @@ for i in range(len(output)) :
             final = pre+' '+post[k]
             case_law.append(final)
 
-            # code for checking whether our clustering is done in right way    
-            if final == "문화재보호법 제2조" :
+            # code for checking whether our clustering is done in right way
+            # you can search laws used in same precedents with search_law
+            search_law = "문화재보호법 제2조" # set search law : this is an example
+            if final == search_law :
                 do_monitor = True
 
         # code for checking whether our clustering is done in right way

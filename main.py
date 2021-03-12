@@ -34,5 +34,8 @@ graph = mapper.map(
                 )
 
 # Visualize it
-mapper.visualize(graph, path_html="keplermapper_output_"+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+".html",
-                 title="law analysis using tda ("+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+")")
+mapper.visualize(
+            graph,
+            path_html="keplermapper_output_"+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+".html",
+            title="law analysis using tda ("+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+")",
+            custom_tooltips=np.load("law_data/law_list.npy"),)
