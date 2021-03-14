@@ -92,8 +92,9 @@ for i in range(len(output)) :
 
     for j in range(t_len) :
         case_law = [] # list for saving laws used in same case
+        """
         do_monitor = False
-
+        """
         pre = str(output[i][2*j])
         post = str(output[i][2*j+1]).split(', ')
         for k in range(len(post)) :
@@ -104,13 +105,17 @@ for i in range(len(output)) :
 
             # code for checking whether our clustering is done in right way
             # you can search laws used in same precedents with search_law
+            """
             search_law = "문화재보호법 제2조" # set search law : this is an example
             if final == search_law :
                 do_monitor = True
+            """
 
         # code for checking whether our clustering is done in right way
+        """
         if do_monitor :
             print("="*30);print(case_law);print("="*30)
+        """
 
         if len(case_law)==1 :
             continue
