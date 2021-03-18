@@ -20,9 +20,9 @@ projected_data = mapper.project(
 )
 
 # Set hyperparameters for clustering
-cubes=30
-overlap=0.3
-epsilon=5
+cubes=15
+overlap=0.15
+epsilon=0.6
 
 # Create dictionary called 'graph' with nodes, edges and meta-information
 graph = mapper.map(
@@ -38,4 +38,4 @@ mapper.visualize(
             graph,
             path_html="keplermapper_output_"+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+".html",
             title="law analysis using tda ("+str(cubes)+"_"+str(overlap)+"_"+str(epsilon)+")",
-            custom_tooltips=np.load("law_data/law_list.npy"),)
+            custom_tooltips=np.load("law_data/law_list.npy"))
